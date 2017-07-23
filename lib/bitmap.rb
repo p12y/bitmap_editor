@@ -22,4 +22,10 @@ class Bitmap
     end
   end
 
+  def color_horizontal_segment(c1, c2, r, c)
+    @r = r - 1; @c1 = c1 - 1; @c2 = c2 - 1
+    row = @array[@r]
+    row[@c1..@c2] = row[@c1..@c2].map {|char| char = c}
+  end
+
 end

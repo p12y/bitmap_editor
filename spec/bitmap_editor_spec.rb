@@ -17,7 +17,7 @@ describe BitmapEditor do
   end
 
   it "colors horizontal segment" do
-    @bitmap = @bitmap_editor.create_bitmap(4, 4)
+    @bitmap = @bitmap_editor.create_bitmap(4, 3)
     @bitmap = @bitmap_editor.color_horizontal_segment(2, 3, 1, "C")
     expect do
       @bitmap_editor.show

@@ -12,7 +12,7 @@ class BitmapEditor
       when /I\s(\d+)\s(\d+)/
         @bitmap = create_bitmap($1.to_i, $2.to_i)
       when /H\s(\d+)\s(\d+)\s(\d+)\s([A-Z])/
-        @bitmap = color_horizontal_segment($1.to_i, $2.to_i, $3.to_i, $4)
+        color_horizontal_segment($1.to_i, $2.to_i, $3.to_i, $4)
       when "S"
         show
       else
