@@ -40,6 +40,13 @@ describe BitmapEditor do
     end.to output("OO\nOO\n").to_stdout
   end
 
+  it "colors pixel" do
+    @bitmap_editor.color(1, 2, "Y")
+    expect do
+      @bitmap_editor.show
+    end.to output("OO\nYO\n").to_stdout
+  end
+
 
   
 end
