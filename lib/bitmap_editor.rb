@@ -15,6 +15,8 @@ class BitmapEditor
         color_horizontal_segment($1.to_i, $2.to_i, $3.to_i, $4)
       when /V\s(\d+)\s(\d+)\s(\d+)\s([A-Z])/
         color_vertical_segment($1.to_i, $2.to_i, $3.to_i, $4)
+      when /L\s(\d+)\s(\d+)\s([A-Z])/
+        color($1.to_i, $2.to_i, $3)
       when "C"
         clear_grid
       when "S"
@@ -43,6 +45,10 @@ class BitmapEditor
 
   def clear_grid
     @bitmap.clear_grid
+  end
+
+  def color(x, y, color)
+    @bitmap.color(x, y, color)
   end
 
 end
