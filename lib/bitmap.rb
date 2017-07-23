@@ -35,4 +35,10 @@ class Bitmap
     end
   end
 
+  def clear_grid
+    @array.each do |arr|
+      arr.map! {|c| c = "O"}
+    end
+  end
+
 end

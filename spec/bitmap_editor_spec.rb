@@ -32,7 +32,12 @@ describe BitmapEditor do
     end.to output("OOO\nOYO\nOYO\nOOO\n").to_stdout
   end
 
-  it "clears table" do
+  it "clears grid" do
+    @bitmap_editor.color_vertical_segment(1, 1, 2, "Y")
+    @bitmap_editor.clear_grid
+    expect do
+      @bitmap_editor.show
+    end.to output("OO\nOO\n").to_stdout
   end
 
 
