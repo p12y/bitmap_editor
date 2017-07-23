@@ -18,10 +18,18 @@ describe BitmapEditor do
 
   it "colors horizontal segment" do
     @bitmap = @bitmap_editor.create_bitmap(4, 3)
-    @bitmap = @bitmap_editor.color_horizontal_segment(2, 3, 1, "C")
+    @bitmap = @bitmap_editor.color_horizontal_segment(2, 3, 1, "Y")
     expect do
       @bitmap_editor.show
-    end.to output("OCCO\nOOOO\n\OOOO\n").to_stdout
+    end.to output("OYYO\nOOOO\n\OOOO\n").to_stdout
+  end
+
+  it "colors vertical segment" do
+    @bitmap = @bitmap_editor.create_bitmap(3, 4)
+    @bitmap = @bitmap_editor.color_vertical_segment(2, 2, 3, "Y")
+    expect do
+      @bitmap_editor.show
+    end.to output("OOO\nOYO\nOYO\nOOO\n").to_stdout
   end
 
 
