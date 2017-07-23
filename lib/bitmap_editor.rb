@@ -13,6 +13,8 @@ class BitmapEditor
         @bitmap = create_bitmap($1.to_i, $2.to_i)
       when /H\s(\d+)\s(\d+)\s(\d+)\s([A-Z])/
         color_horizontal_segment($1.to_i, $2.to_i, $3.to_i, $4)
+      when /V\s(\d+)\s(\d+)\s(\d+)\s([A-Z])/
+        color_vertical_segment($1.to_i, $2.to_i, $3.to_i, $4)
       when "S"
         show
       else
@@ -29,8 +31,12 @@ class BitmapEditor
     @bitmap.render
   end
 
-  def color_horizontal_segment(c1, c2, r, c)
-    @bitmap.color_horizontal_segment(c1, c2, r, c)
+  def color_horizontal_segment(col1, col2, row, color)
+    @bitmap.color_horizontal_segment(col1, col2, row, color)
+  end
+
+  def color_vertical_segment(col, row1, row2, color)
+    @bitmap.color_vertical_segment(col, row1, row2, color)
   end
 
 end
