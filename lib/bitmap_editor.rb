@@ -1,7 +1,7 @@
 require './lib/bitmap'
 
 class BitmapEditor
-  attr_accessor :bitmap
+  attr_accessor :bitmap, :error
 
   def run(file)
     return puts "please provide correct file" if file.nil? || !File.exists?(file)
@@ -29,31 +29,40 @@ class BitmapEditor
 
   def create_bitmap(width, height)
     @bitmap = Bitmap.new(width, height)
-    if !@bitmap.valid?
-      puts "Invalid size"
-      @bitmap = nil
-    end
-    @bitmap
+    validate_bitmap
   end
 
   def show
-    @bitmap.render if @bitmap
+    validate_bitmap
+    @bitmap.render
   end
 
   def color_horizontal_segment(col1, col2, row, color)
+    validate_bitmap
     @bitmap.color_horizontal_segment(col1, col2, row, color)
   end
 
   def color_vertical_segment(col, row1, row2, color)
+    validate_bitmap
     @bitmap.color_vertical_segment(col, row1, row2, color)
   end
 
   def clear_grid
+    validate_bitmap
     @bitmap.clear_grid
   end
 
   def color(x, y, color)
+    validate_bitmap
     @bitmap.color(x, y, color)
+  end
+
+  def validate_bitmap
+    unless @bitmap.valid?
+      puts "Invalid size"
+      exit
+    end
+    @bitmap
   end
 
 end

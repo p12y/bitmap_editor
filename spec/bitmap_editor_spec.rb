@@ -47,6 +47,12 @@ describe BitmapEditor do
     end.to output("OO\nYO\n").to_stdout
   end
 
+  it "fails gracefully with incorrect size" do
+    expect do
+      @bitmap = @bitmap_editor.create_bitmap(0, 4)
+    end.to output("Incorrect size\n").to_stdout
+  end
+
 
   
 end
