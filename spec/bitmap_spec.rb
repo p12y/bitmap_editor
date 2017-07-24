@@ -23,11 +23,18 @@ describe Bitmap do
     expect(@bitmap.valid?).to eq false
   end
 
-  it "stops execution if command coordinates out of bounds" do
+  it "alerts user if row coords out of bounds" do
     @bitmap = Bitmap.new(1, 2)
-    expect do
-      @bitmap.color(1, 5, "Y")
-    end.to raise_error(SystemExit)
+    expect {
+      expect { @bitmap.color(1, 5, "Y") }.to raise_error(SystemExit)
+    }.to output("Row coordinates must be between 1 and 2\n").to_stderr
+  end
+
+  it "alerts user if col coords out of bounds" do
+    @bitmap = Bitmap.new(1, 2)
+    expect {
+      expect { @bitmap.color(0, 2, "Y") }.to raise_error(SystemExit)
+    }.to output("Column coordinates must be between 1 and 1\n").to_stderr
   end
 
 end

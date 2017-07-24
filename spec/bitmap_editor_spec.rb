@@ -51,17 +51,16 @@ describe BitmapEditor do
   end
 
   it "fails gracefully with incorrect size" do
-    expect do
-      @bitmap = @bitmap_editor.create_bitmap(0, 4)
-    end.to raise_error(SystemExit)
+    expect {
+      expect { @bitmap = @bitmap_editor.create_bitmap(0, 4) }.to raise_error(SystemExit)
+    }.to output("Invalid size\n").to_stderr
   end
 
   it "alerts user to create bitmap if command issued without bitmap" do
-    expect do
-      @bitmap_editor.color(1, 2, "Y")
-    end.to raise_error(SystemExit)
+    expect {
+      expect { @bitmap_editor.color(1, 2, "Y") }.to raise_error(SystemExit)
+    }.to output("Create image before issuing commands\n").to_stderr
   end
-
 
   
 end
