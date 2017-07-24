@@ -19,7 +19,7 @@ describe BitmapEditor do
 
   it "colors horizontal segment" do
     @bitmap = @bitmap_editor.create_bitmap(4, 3)
-    @bitmap_editor.color_horizontal_segment(2, 3, 1, "Y")
+    @bitmap_editor.color_horizontal_segment(coords: {col1: 2, col2: 3, row: 1}, color: "Y")
     expect do
       @bitmap_editor.show
     end.to output("OYYO\nOOOO\n\OOOO\n").to_stdout

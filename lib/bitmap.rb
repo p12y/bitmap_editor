@@ -26,11 +26,13 @@ class Bitmap
     end
   end
 
-  def color_horizontal_segment(col1, col2, row, color)
-    check_in_bounds(cols: [col1, col2], row: row)
-    @r = row - 1; @c1 = col1 - 1; @c2 = col2 - 1
-    row = @array[@r]
-    row[@c1..@c2] = row[@c1..@c2].map {|char| char = color}
+  def color_horizontal_segment(**keyword_args)
+    keyword_args[:coords].each do |k, v|
+      instance_variable_set "@#{k}", v - 1
+    end
+    check_in_bounds(cols: [@col1, @col2], row: @row)
+    row = @array[@row]
+    row[@col1..@col2] = row[@col1..@col2].map {|char| char = keyword_args[:color]}
   end
 
   def color_vertical_segment(**keyword_args)

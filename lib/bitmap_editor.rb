@@ -12,7 +12,7 @@ class BitmapEditor
       when /^I\s(\d+)\s(\d+)$/
         @bitmap = create_bitmap($1.to_i, $2.to_i)
       when /^H\s(\d+)\s(\d+)\s(\d+)\s([A-Z])$/
-        color_horizontal_segment($1.to_i, $2.to_i, $3.to_i, $4)
+        color_horizontal_segment(coords: {col1: $1.to_i, col2: $2.to_i, row: $3.to_i}, color: $4)
       when /^V\s(\d+)\s(\d+)\s(\d+)\s([A-Z])$/
         color_vertical_segment(coords: {col: $1.to_i, row1: $2.to_i, row2: $3.to_i}, color: $4)
       when /^L\s(\d+)\s(\d+)\s([A-Z])$/
@@ -38,9 +38,9 @@ class BitmapEditor
     @bitmap.render
   end
 
-  def color_horizontal_segment(col1, col2, row, color)
+  def color_horizontal_segment(**keyword_args)
     validate_bitmap
-    @bitmap.color_horizontal_segment(col1, col2, row, color)
+    @bitmap.color_horizontal_segment(keyword_args)
   end
 
   def color_vertical_segment(**keyword_args)
