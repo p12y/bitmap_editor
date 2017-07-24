@@ -44,7 +44,7 @@ describe BitmapEditor do
 
   it "colors pixel" do
     @bitmap = @bitmap_editor.create_bitmap(2, 2)
-    @bitmap_editor.color(1, 2, "Y")
+    @bitmap_editor.color(coords: {col: 1, row: 2}, color: "Y")
     expect do
       @bitmap_editor.show
     end.to output("OO\nYO\n").to_stdout
@@ -58,7 +58,7 @@ describe BitmapEditor do
 
   it "alerts user to create bitmap if command issued without bitmap" do
     expect {
-      expect { @bitmap_editor.color(1, 2, "Y") }.to raise_error(SystemExit)
+      expect { @bitmap_editor.color(coords: {col: 1, row: 2}, color: "Y") }.to raise_error(SystemExit)
     }.to output("Create image before issuing commands\n").to_stderr
   end
 

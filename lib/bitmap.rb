@@ -47,10 +47,12 @@ class Bitmap
     end
   end
 
-  def color(x, y, color)
-    check_in_bounds(col: x, row: y)
-    @x = x - 1; @y = y - 1
-    @array[@y][@x] = color
+  def color(**keyword_args)
+    keyword_args[:coords].each do |k, v|
+      instance_variable_set "@#{k}", v - 1
+    end
+    check_in_bounds(col: @col + 1, row: @row + 1)
+    @array[@row][@col] = keyword_args[:color]
   end
 
   def check_in_bounds(**keyword_arguments)
