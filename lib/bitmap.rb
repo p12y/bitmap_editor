@@ -9,11 +9,15 @@ class Bitmap
   end
 
   def length
-    @array.length
+    @length
   end
 
   def width
-    @array[1].length
+    @width
+  end
+
+  def valid?
+    (1..250).include?(@width) && (1..250).include?(@length)
   end
 
   def render
