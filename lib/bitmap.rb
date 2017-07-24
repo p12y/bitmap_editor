@@ -30,7 +30,7 @@ class Bitmap
     keyword_args[:coords].each do |k, v|
       instance_variable_set "@#{k}", v - 1
     end
-    check_in_bounds(cols: [@col1, @col2], row: @row)
+    check_in_bounds(cols: [@col1 + 1, @col2 + 1], row: @row + 1)
     row = @array[@row]
     row[@col1..@col2] = row[@col1..@col2].map {|char| char = keyword_args[:color]}
   end
