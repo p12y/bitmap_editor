@@ -8,4 +8,9 @@ describe Bitmap do
     expect(@bitmap.length).to eq 2
   end
 
+  it "validates pixel coordinates" do
+    @bitmap = Bitmap.new(1, 250)
+    expect(@bitmap.valid?).to eq false
+  end
+
 end
