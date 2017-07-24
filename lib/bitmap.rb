@@ -49,5 +49,4 @@ class Bitmap
     @x = x - 1; @y = y - 1
     @array[@y][@x] = color
   end
-
 end

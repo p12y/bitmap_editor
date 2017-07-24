@@ -23,4 +23,11 @@ describe Bitmap do
     expect(@bitmap.valid?).to eq false
   end
 
+  it "stops execution if command coordinates out of bounds" do
+    @bitmap = Bitmap.new(1, 2)
+    expect do
+      @bitmap.color(1, 5, "Y")
+    end.to raise_error(SystemExit)
+  end
+
 end
