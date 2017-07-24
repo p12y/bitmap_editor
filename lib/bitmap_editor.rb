@@ -29,10 +29,15 @@ class BitmapEditor
 
   def create_bitmap(width, height)
     @bitmap = Bitmap.new(width, height)
+    if !@bitmap.valid?
+      puts "Invalid size"
+      @bitmap = nil
+    end
+    @bitmap
   end
 
   def show
-    @bitmap.render
+    @bitmap.render if @bitmap
   end
 
   def color_horizontal_segment(col1, col2, row, color)
