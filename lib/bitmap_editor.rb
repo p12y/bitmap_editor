@@ -14,7 +14,7 @@ class BitmapEditor
       when /^H\s(\d+)\s(\d+)\s(\d+)\s([A-Z])$/
         color_horizontal_segment($1.to_i, $2.to_i, $3.to_i, $4)
       when /^V\s(\d+)\s(\d+)\s(\d+)\s([A-Z])$/
-        color_vertical_segment($1.to_i, $2.to_i, $3.to_i, $4)
+        color_vertical_segment(coords: {col: $1.to_i, row1: $2.to_i, row2: $3.to_i}, color: $4)
       when /^L\s(\d+)\s(\d+)\s([A-Z])$/
         color(coords: {col: $1.to_i, row: $2.to_i}, color: $3)
       when "C"
@@ -43,9 +43,9 @@ class BitmapEditor
     @bitmap.color_horizontal_segment(col1, col2, row, color)
   end
 
-  def color_vertical_segment(col, row1, row2, color)
+  def color_vertical_segment(**keyword_args)
     validate_bitmap
-    @bitmap.color_vertical_segment(col, row1, row2, color)
+    @bitmap.color_vertical_segment(keyword_args)
   end
 
   def clear_grid

@@ -33,11 +33,13 @@ class Bitmap
     row[@c1..@c2] = row[@c1..@c2].map {|char| char = color}
   end
 
-  def color_vertical_segment(col, row1, row2, color)
-    check_in_bounds(col: col, rows: [row1, row2])
-    @col = col - 1; @row1 = row1 - 1; @row2 = row2 - 1
+  def color_vertical_segment(**keyword_args)
+    keyword_args[:coords].each do |k, v|
+      instance_variable_set "@#{k}", v - 1
+    end
+    check_in_bounds(col: @col + 1, rows: [@row1 + 1, @row2 + 1])
     @array.slice(@row1, @row2).each do |arr|
-      arr[@col] = color
+      arr[@col] = keyword_args[:color]
     end
   end
 

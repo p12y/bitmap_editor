@@ -27,7 +27,7 @@ describe BitmapEditor do
 
   it "colors vertical segment" do
     @bitmap = @bitmap_editor.create_bitmap(3, 4)
-    @bitmap_editor.color_vertical_segment(2, 2, 3, "Y")
+    @bitmap_editor.color_vertical_segment(coords: {col: 2, row1: 2, row2: 3}, color: "Y")
     expect do
       @bitmap_editor.show
     end.to output("OOO\nOYO\nOYO\nOOO\n").to_stdout
@@ -35,7 +35,7 @@ describe BitmapEditor do
 
   it "clears grid" do
     @bitmap = @bitmap_editor.create_bitmap(2, 2)
-    @bitmap_editor.color_vertical_segment(1, 1, 2, "Y")
+    @bitmap_editor.color_vertical_segment(coords: {col: 1, row1: 1, row2: 2}, color: "Y")
     @bitmap_editor.clear_grid
     expect do
       @bitmap_editor.show
