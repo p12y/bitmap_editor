@@ -3,14 +3,15 @@ require_relative '../lib/bitmap_editor'
 describe BitmapEditor do
   before :each do
     @bitmap_editor = BitmapEditor.new
-    @bitmap = @bitmap_editor.create_bitmap(2, 2)
   end
 
   it "creates bitmap" do
+    @bitmap = @bitmap_editor.create_bitmap(2, 2)
     expect(@bitmap).to be_instance_of Bitmap
   end
 
   it "shows bitmap" do
+    @bitmap = @bitmap_editor.create_bitmap(2, 2)
     expect do
       @bitmap_editor.show
     end.to output("OO\nOO\n").to_stdout
@@ -33,6 +34,7 @@ describe BitmapEditor do
   end
 
   it "clears grid" do
+    @bitmap = @bitmap_editor.create_bitmap(2, 2)
     @bitmap_editor.color_vertical_segment(1, 1, 2, "Y")
     @bitmap_editor.clear_grid
     expect do
@@ -41,6 +43,7 @@ describe BitmapEditor do
   end
 
   it "colors pixel" do
+    @bitmap = @bitmap_editor.create_bitmap(2, 2)
     @bitmap_editor.color(1, 2, "Y")
     expect do
       @bitmap_editor.show
@@ -50,7 +53,13 @@ describe BitmapEditor do
   it "fails gracefully with incorrect size" do
     expect do
       @bitmap = @bitmap_editor.create_bitmap(0, 4)
-    end.to output("Incorrect size\n").to_stdout
+    end.to raise_error(SystemExit)
+  end
+
+  it "alerts user to create bitmap if command issued without bitmap" do
+    expect do
+      @bitmap_editor.color(1, 2, "Y")
+    end.to raise_error(SystemExit)
   end
 
 

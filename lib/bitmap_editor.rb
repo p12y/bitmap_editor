@@ -30,6 +30,7 @@ class BitmapEditor
   def create_bitmap(width, height)
     @bitmap = Bitmap.new(width, height)
     validate_bitmap
+    @bitmap
   end
 
   def show
@@ -58,10 +59,8 @@ class BitmapEditor
   end
 
   def validate_bitmap
-    unless @bitmap.valid?
-      puts "Invalid size"
-      exit
-    end
+    abort "Create image before issuing commands" if !@bitmap
+    abort "Invalid size" if !@bitmap.valid?      
     @bitmap
   end
 
