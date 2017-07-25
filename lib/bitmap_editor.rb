@@ -22,7 +22,12 @@ class BitmapEditor
       when "S"
         show
       else
-          puts 'unrecognised command :('
+          command = line[0]
+          if valid_command?(command)
+            abort "Command '#{command}' contains invalid parameters"
+          else
+            abort "'#{command}' is not a recognised command"
+          end
       end
     end
   end
@@ -63,5 +68,13 @@ class BitmapEditor
     abort "Invalid size" if !@bitmap.valid?      
     @bitmap
   end
+
+  private
+
+  def valid_command?(command)
+    valid_commands = ['I', 'C', 'L', 'V', 'H', 'S']
+    valid_commands.include?(command)
+  end
+
 
 end

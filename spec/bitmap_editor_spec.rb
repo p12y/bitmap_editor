@@ -1,4 +1,5 @@
 require_relative '../lib/bitmap_editor'
+require 'stringio'
 
 describe BitmapEditor do
   before :each do
@@ -60,6 +61,30 @@ describe BitmapEditor do
     expect {
       expect { @bitmap_editor.color(coords: {col: 1, row: 2}, color: "Y") }.to raise_error(SystemExit)
     }.to output("Create image before issuing commands\n").to_stderr
+  end
+
+  it "alerts user to provide file if no file provided" do
+    expect {
+      BitmapEditor.new.run(' ')
+    }.to output("please provide correct file\n").to_stdout
+  end
+
+  it "alerts user to provide file if incorrect file provided" do
+    expect {
+      BitmapEditor.new.run('file')
+    }.to output("please provide correct file\n").to_stdout
+  end
+
+  it "alerts user to provide file if incorrect file provided" do
+    expect {
+      expect { BitmapEditor.new.run("spec/fixtures/incorrect_command.txt")}.to raise_error(SystemExit)
+    }.to output("'M' is not a recognised command\n").to_stderr
+  end
+
+  it "alerts if incorrect parameters provided" do
+    expect {
+      expect { BitmapEditor.new.run("spec/fixtures/incorrect_params.txt")}.to raise_error(SystemExit)
+    }.to output("Command 'I' contains invalid parameters\n").to_stderr
   end
 
   

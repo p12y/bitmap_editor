@@ -5,7 +5,8 @@ class Bitmap
   def initialize(width, length)
     @width = width
     @length = length
-    @array = Array.new(length) { Array.new(width, "O") }
+    @DEFAULT_COLOR = 'O'
+    @array = Array.new(length) { Array.new(width, @DEFAULT_COLOR) }
   end
 
   def length
@@ -43,7 +44,7 @@ class Bitmap
 
   def clear_grid
     @array.each do |arr|
-      arr.map! {|c| c = "O"}
+      arr.map! {|c| c = @DEFAULT_COLOR}
     end
   end
 
