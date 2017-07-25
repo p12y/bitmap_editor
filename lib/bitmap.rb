@@ -67,23 +67,23 @@ class Bitmap
       args.each do |k, v|
         case k
         when :col
-          validate_coord(v + 1, @width, :column)
+          validate_coord(v, @width, :column)
         when :row
-          validate_coord(v + 1, @length, :row)
+          validate_coord(v, @length, :row)
         when :cols
           args[:cols].each do |col|
-            validate_coord(col + 1, @width, :column)
+            validate_coord(col, @width, :column)
           end
         when :rows
           args[:rows].each do |row|
-            validate_coord(row + 1, @length, :row)
+            validate_coord(row, @length, :row)
           end
         end
       end
     end
 
     def validate_coord(coord, dimension, type)
-      if !(1..dimension).include?(coord)
+      if !(1..dimension).include?(coord + 1)
         abort "#{type.to_s.capitalize} coordinates must be between 1 and #{dimension}"
       end
     end
