@@ -8,6 +8,7 @@ class BitmapEditor
 
     File.open(file).each do |line|
       line = line.chomp
+      command = line[0]
       case line
       when /^I\s(\d+)\s(\d+)$/
         @bitmap = create_bitmap($1.to_i, $2.to_i)
@@ -22,12 +23,11 @@ class BitmapEditor
       when "S"
         show
       else
-          command = line[0]
-          if valid_command?(command)
-            abort "Command '#{command}' contains invalid parameters"
-          else
-            abort "'#{command}' is not a recognised command"
-          end
+        if valid_command?(command)
+          abort "Command '#{command}' contains invalid parameters"
+        else
+          abort "'#{command}' is not a recognised command"
+        end
       end
     end
   end
@@ -43,14 +43,14 @@ class BitmapEditor
     @bitmap.render
   end
 
-  def color_horizontal_segment(**keyword_args)
+  def color_horizontal_segment(**args)
     validate_bitmap
-    @bitmap.color_horizontal_segment(keyword_args)
+    @bitmap.color_horizontal_segment(args)
   end
 
-  def color_vertical_segment(**keyword_args)
+  def color_vertical_segment(**args)
     validate_bitmap
-    @bitmap.color_vertical_segment(keyword_args)
+    @bitmap.color_vertical_segment(args)
   end
 
   def clear_grid
@@ -58,23 +58,22 @@ class BitmapEditor
     @bitmap.clear_grid
   end
 
-  def color(**keyword_args)
+  def color(**args)
     validate_bitmap
-    @bitmap.color(keyword_args)
-  end
-
-  def validate_bitmap
-    abort "Create image before issuing commands" if !@bitmap
-    abort "Invalid size" if !@bitmap.valid?      
-    @bitmap
+    @bitmap.color(args)
   end
 
   private
 
-  def valid_command?(command)
-    valid_commands = ['I', 'C', 'L', 'V', 'H', 'S']
-    valid_commands.include?(command)
-  end
+    def valid_command?(command)
+      valid_commands = ['I', 'C', 'L', 'V', 'H', 'S']
+      valid_commands.include?(command)
+    end
 
+    def validate_bitmap
+      abort "Create image before issuing commands" if !@bitmap
+      abort "Invalid size" if !@bitmap.valid?      
+      @bitmap
+    end
 
 end
