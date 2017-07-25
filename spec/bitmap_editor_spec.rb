@@ -13,42 +13,42 @@ describe BitmapEditor do
 
   it "shows bitmap" do
     @bitmap = @bitmap_editor.create_bitmap(2, 2)
-    expect do
+    expect {
       @bitmap_editor.show
-    end.to output("OO\nOO\n").to_stdout
+    }.to output("OO\nOO\n").to_stdout
   end
 
   it "colors horizontal segment" do
     @bitmap = @bitmap_editor.create_bitmap(4, 3)
     @bitmap_editor.color_horizontal_segment(coords: {col1: 2, col2: 3, row: 1}, color: "Y")
-    expect do
+    expect {
       @bitmap_editor.show
-    end.to output("OYYO\nOOOO\n\OOOO\n").to_stdout
+    }.to output("OYYO\nOOOO\n\OOOO\n").to_stdout
   end
 
   it "colors vertical segment" do
     @bitmap = @bitmap_editor.create_bitmap(3, 4)
     @bitmap_editor.color_vertical_segment(coords: {col: 2, row1: 2, row2: 3}, color: "Y")
-    expect do
+    expect {
       @bitmap_editor.show
-    end.to output("OOO\nOYO\nOYO\nOOO\n").to_stdout
+    }.to output("OOO\nOYO\nOYO\nOOO\n").to_stdout
   end
 
   it "clears grid" do
     @bitmap = @bitmap_editor.create_bitmap(2, 2)
     @bitmap_editor.color_vertical_segment(coords: {col: 1, row1: 1, row2: 2}, color: "Y")
     @bitmap_editor.clear_grid
-    expect do
+    expect {
       @bitmap_editor.show
-    end.to output("OO\nOO\n").to_stdout
+    }.to output("OO\nOO\n").to_stdout
   end
 
   it "colors pixel" do
     @bitmap = @bitmap_editor.create_bitmap(2, 2)
     @bitmap_editor.color(coords: {col: 1, row: 2}, color: "Y")
-    expect do
+    expect {
       @bitmap_editor.show
-    end.to output("OO\nYO\n").to_stdout
+    }.to output("OO\nYO\n").to_stdout
   end
 
   it "fails gracefully with incorrect size" do
