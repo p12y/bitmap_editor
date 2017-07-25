@@ -28,14 +28,14 @@ class Bitmap
 
   def color_horizontal_segment(**keyword_args)
     set_vars(keyword_args)
-    check_in_bounds(cols: [@col1 + 1, @col2 + 1], row: @row + 1)
+    check_in_bounds(cols: [@col1, @col2], row: @row)
     row = @array[@row]
     row[@col1..@col2] = row[@col1..@col2].map {|char| char = keyword_args[:color]}
   end
 
   def color_vertical_segment(**keyword_args)
     set_vars(keyword_args)
-    check_in_bounds(col: @col + 1, rows: [@row1 + 1, @row2 + 1])
+    check_in_bounds(col: @col, rows: [@row1, @row2])
     @array.slice(@row1, @row2).each do |arr|
       arr[@col] = keyword_args[:color]
     end
@@ -49,7 +49,7 @@ class Bitmap
 
   def color(**keyword_args)
     set_vars(keyword_args)
-    check_in_bounds(col: @col + 1, row: @row + 1)
+    check_in_bounds(col: @col, row: @row)
     @array[@row][@col] = keyword_args[:color]
   end
 
@@ -65,16 +65,16 @@ class Bitmap
       keyword_arguments.each do |k, v|
         case k
         when :col
-          validate_coord(v, @width, :column)
+          validate_coord(v + 1, @width, :column)
         when :row
-          validate_coord(v, @length, :row)
+          validate_coord(v + 1, @length, :row)
         when :cols
           keyword_arguments[:cols].each do |col|
-            validate_coord(col, @width, :column)
+            validate_coord(col + 1, @width, :column)
           end
         when :rows
           keyword_arguments[:rows].each do |row|
-            validate_coord(row, @length, :row)
+            validate_coord(row + 1, @length, :row)
           end
         end
       end
