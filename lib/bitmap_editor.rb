@@ -1,7 +1,6 @@
 require './lib/bitmap'
 
 class BitmapEditor
-  attr_accessor :bitmap, :error
 
   def run(file)
     return puts "please provide correct file" if file.nil? || !File.exists?(file)

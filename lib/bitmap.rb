@@ -1,7 +1,5 @@
 
 class Bitmap
-  attr_reader :array
-
   def initialize(width, length)
     @width = width
     @length = length
