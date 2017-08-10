@@ -57,6 +57,11 @@ class BitmapEditor
     @bitmap.clear_grid
   end
 
+  def fill(x, y, color)
+    validate_bitmap
+    @bitmap.fill(x, y, color)
+  end
+
   def color(**args)
     validate_bitmap
     @bitmap.color(args)
