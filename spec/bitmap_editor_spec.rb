@@ -86,42 +86,5 @@ describe BitmapEditor do
       expect { BitmapEditor.new.run("spec/fixtures/incorrect_params.txt")}.to raise_error(SystemExit)
     }.to output("Command 'I' contains invalid parameters\n").to_stderr
   end
-
-  describe '#fill' do
-    it 'fills simple one-by-one bitmap' do
-      @bitmap = @bitmap_editor.create_bitmap(1, 1)
-      @bitmap.fill(1, 1, 'Y')
-      expect {
-        @bitmap_editor.show
-      }.to output("Y\n").to_stdout
-    end
-
-    it 'fills two-by-one bitmap' do
-      @bitmap = @bitmap_editor.create_bitmap(2, 1)
-      @bitmap.fill(1, 1, "Y")
-      expect {
-        @bitmap_editor.show
-      }.to output("YY\n").to_stdout
-    end
-
-    it 'stops at different color' do
-      @bitmap = @bitmap_editor.create_bitmap(3, 1)
-      @bitmap_editor.color(coords: {col: 2, row: 1}, color: 'X')
-      @bitmap.fill(1, 1, "Y")
-      expect {
-        @bitmap_editor.show
-      }.to output("YXO\n").to_stdout
-    end
-
-    it 'fills complex shape' do
-      @bitmap = @bitmap_editor.create_bitmap(3, 3)
-      @bitmap_editor.color(coords: {col: 2, row: 2}, color: 'X')
-      @bitmap.fill(1, 1, "Y")
-      expect {
-        @bitmap_editor.show
-      }.to output("YYY\nYXY\nYYY").to_stdout
-    end
-  end
-
   
 end

@@ -25,22 +25,6 @@ class Bitmap
     end
   end
 
-  def fill(col, row, color, color_to_replace = nil)
-    color_to_replace = @array[row - 1][col - 1] if color_to_replace.nil?
-    current_color = @array[row - 1][col - 1]
-    
-    return if color_to_replace != current_color
-
-    if col < width
-      fill(col + 1, row, color, color_to_replace)  
-    end
-
-    if col > 1
-      fill(col - 1, row, color, color_to_replace)
-    end
-    @array[row - 1][col - 1] = color
-  end
-
   def color_horizontal_segment(**args)
     set_vars(args)
     check_in_bounds(cols: [@col1, @col2], row: @row)
